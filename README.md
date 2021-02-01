@@ -1,4 +1,4 @@
-![100DoC](https://i.ibb.co/dpvbchx/Custom-dimensions-1280x240-px.png)
+[![100DC](https://i.postimg.cc/CLV2MqZ1/100DC.png)](https://postimg.cc/vD3h3DtF)
 
 [I](https://github.com/rohanbari) originally started my #100DaysOfCode challenge on 1st February 2021.
 This is my personal repository where I archive my code and make it open-source to everyone.
