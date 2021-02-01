@@ -1,4 +1,4 @@
-# #100DaysOfCode
+![100DoC](https://i.ibb.co/dpvbchx/Custom-dimensions-1280x240-px.png)
 
 [I](https://github.com/rohanbari) originally started my #100DaysOfCode challenge on 1st February 2021.
 This is my personal repository where I archive my code and make it open-source to everyone.
