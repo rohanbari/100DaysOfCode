@@ -89,7 +89,7 @@ int main(int argc, char *argv[]) {
         if (fp == NULL) {
             fprintf(stderr,
                     "[error] The database does not exist.\n"
-                    "Use the command '--build' or '-b' to create one.\n");
+                    "Use the command '--build-db' or '-b' to create one.\n");
             return EXIT_FAILURE;
         }
     }
