@@ -127,8 +127,10 @@ int main(int argc, char *argv[]) {
 
             if (remove(argv[2]) == 0)
                 fprintf(stdout, "[success] The file was deleted.\n");
-            else
+            else {
                 perror(argv[2]);
+                return EXIT_SUCCESS;
+            }
 
             break;
         }
