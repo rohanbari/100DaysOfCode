@@ -22,7 +22,6 @@
 
 // The default structure of the database
 typedef struct {
-    int code;
     char full_name[MAX_LENGTH - 128];
     char address[MAX_LENGTH];
     int age;
@@ -40,7 +39,6 @@ void display_help(const char *arg) {
             "  --help        View this help message\n"
             "  --build-db    Construct a new database\n"
             "  --add         Add a new entry to the database\n"
-            "  --search      Locate for an entry from the database\n"
             "  --list        View all the entries\n"
             "  --delete      Delete the specified database\n\n"
             "NOTES:  1. Option abbvrs. available, e.g. -b, -a, -s, -l, -d\n"
@@ -72,12 +70,10 @@ int main(int argc, char *argv[]) {
         mode = 0;
     else if (strcmp(argv[1], "--add") == 0 || strcmp(argv[1], "-a") == 0)
         mode = 1;
-    else if (strcmp(argv[1], "--search") == 0 || strcmp(argv[1], "-s") == 0)
+    else if (strcmp(argv[1], "--list") == 0 || strcmp(argv[1], "-l") == 0)
         mode = 2;
     else if (strcmp(argv[1], "--delete") == 0 || strcmp(argv[1], "-d") == 0)
         mode = 3;
-    else if (strcmp(argv[1], "--list") == 0 || strcmp(argv[1], "-l") == 0)
-        mode = 4;
     else {
         fprintf(stderr, "[error] Invalid argument '%s'.\n", argv[1]);
         return EXIT_FAILURE;
@@ -95,6 +91,7 @@ int main(int argc, char *argv[]) {
     }
 
     switch (mode) {
+        // Database creation
         case 0: {
             fp = fopen(argv[2], "r");
 
@@ -120,6 +117,7 @@ int main(int argc, char *argv[]) {
 
             break;
         }
+        // Adds an entry
         case 1: {
             fp = fopen(argv[2], "a");
 
@@ -170,51 +168,44 @@ int main(int argc, char *argv[]) {
             fprintf(stdout, "Enter the employee's salary:  ");
 
             if (fscanf(stdin, "%lf", &em.salary) != 1) {
-                fprintf(stdout, "[error] Salary was improperly entered.\n");
+                fprintf(stderr, "[error] Salary was improperly entered.\n");
                 return EXIT_FAILURE;
             }
 
-            fprintf(fp,
-                "%-6d-> %s | %s | %d | %c | %lf\n", em.code, em.full_name,
-                em.address, em.age, em.gender, em.salary);
+            fprintf(fp, "Name: %s, Addr: %s, Age: %d, Gender: %c, Sal: %.2lf\n",
+                    em.full_name, em.address, em.age, em.gender, em.salary);
 
             fprintf(stdout, "[success] Data insertion complete.\n");
 
-            break; 
+            break;
         }
+        // Display the entries
         case 2: {
+            int c;
             fp = fopen(argv[2], "r");
-            
-            char name[MAX_LENGTH - 128] = {0};
-            fprintf(stdout, "Employee Name:  ");
 
-            if (fgets(name, sizeof(name), stdin) == NULL) {
-                fprintf(stdout, "[error] Invalid name inputted.\n");
+            while ((c = fgetc(fp)) != EOF)
+                putchar(c);
+            fprintf(stdout, "[info] All the entries are now on the screen.\n");
+
+            break;
+        }
+        // Delete the database
+        case 3: {
+            fp = fopen(argv[2], "r");
+
+            if (!fp) {
+                perror(argv[2]);
                 return EXIT_FAILURE;
             }
 
-            name[strlen(name) - 1] = 0;
-
-            // TODO: Construction is left to be done here
-            while (fscanf(fp, "%d-> %s | %s | %d | %c | %lf\n", &em.code,
-                   em.full_name, em.address,
-                   &em.age, &em.gender, &em.salary) != EOF) {
-                   // TODO: EOF is never reached
-                fprintf(stdout, "%s\n", em.full_name);
-
-                if (strcmp(name, em.full_name) == 0) {
-                    fprintf(stdout,
-                        "%-6d-> %s | %s | %d | %c | %lf\n", em.code,
-                        em.full_name, em.address, em.age, em.gender, em.salary);
-                }
+            if (remove(argv[2]) != 0) {
+                perror(argv[2]);
+                return EXIT_FAILURE;
             }
 
-            break;
-        }
-        case 3: {
-            break;
-        }
-        case 4: {
+            return EXIT_SUCCESS; // Must not reach fclose() or this will hit a
+                                 // segfault and exit unexpectedly
             break;
         }
         default: {
@@ -222,6 +213,7 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    // Closing the file stream
     fclose(fp);
 
     return EXIT_SUCCESS;
