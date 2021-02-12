@@ -38,6 +38,9 @@ int main(void) {
     for (int i = 0; i < count; i++)
         fprintf(stdout, "%s | %02d : %02d\n", loc[i].name, loc[i].hr,
                 loc[i].min);
-
+    
+    // Deallocating the memory
+    free(loc);
+    
     return 0;
 }
