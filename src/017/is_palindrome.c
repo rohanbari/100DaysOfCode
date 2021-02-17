@@ -1,5 +1,5 @@
 /**
- * @file main.c
+ * @file is_palindrome.c
  * @author Rohan Bari (rohanbari4@gmail.com)
  * @brief Program to check if a string is palindrome.
  * @version 0.1
