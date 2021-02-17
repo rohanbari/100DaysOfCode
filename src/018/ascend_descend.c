@@ -15,35 +15,35 @@
 #include <stdlib.h>
 
 /**
+ * @brief Performs swap between two integer variables using pointers.
+ *
+ * @param x First value
+ * @param y Value to be swapped with the first value
+ */
+void swap(int *x, int *y) {
+    *x = *x + *y;
+    *y = *x - *y;
+    *x = *x - *y;
+}
+
+/**
  * @brief The sorting subroutine.
  *
  * @param arr Array to be manipulated
  * @param len Constant length of the array
  */
 void sort(int *arr, const int len) {
-    int temp = 0;
-
     // Sorting the left-half in ascending order
-    for (int i = len / 2; i < len; i++) {
-        for (int j = i + 1; j < len; j++) {
-            if (arr[i] < arr[j]) {
-                temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
-            }
-        }
-    }
+    for (int i = len / 2; i < len; i++)
+        for (int j = i + 1; j < len; j++)
+            if (arr[i] < arr[j])
+                swap(&arr[i], &arr[j]);
 
     // Sorting the left-half in descending order
-    for (int i = 0; i < len / 2; i++) {
-        for (int j = i + 1; j < len / 2; j++) {
-            if (arr[i] > arr[j]) {
-                temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
-            }
-        }
-    }
+    for (int i = 0; i < len / 2; i++)
+        for (int j = i + 1; j < len / 2; j++)
+            if (arr[i] > arr[j])
+                swap(&arr[i], &arr[j]);
 
     // Displaying the manipulated sorted array
     for (int i = 0; i < len; i++)
