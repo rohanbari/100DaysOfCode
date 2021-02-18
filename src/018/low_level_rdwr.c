@@ -13,7 +13,9 @@
  *
  */
 
+// stdio.h wasn't required if BUFSIZ was replaced with another macro
 #include <stdio.h>
+// Defining the UNIX standard syscalls
 #include <unistd.h>
 
 int main(void) {
