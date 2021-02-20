@@ -19,13 +19,11 @@
 void var_scope_example_1(void) {
     double var = 4.32;
 
-    {
-        // Scope 1
+    { // Scope 1
         double var = 7.0;
         fprintf(stdout, "The shadowed variable carried: %.2lf\n", var);
 
-        {
-            // Sub-scope
+        { // Sub-scope
             var = 0.0; // Altering the shadowed variable's value
             fprintf(stdout, "Now it carries: %.2lf\n", var);
         }
@@ -49,6 +47,7 @@ void var_scope_loop_example_2() {
 }
 
 int main(void) {
+    // Calling the subroutines to execute and display the results
     var_scope_example_1();
     var_scope_loop_example_2();
 
