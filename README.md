@@ -7,9 +7,9 @@ The history and everything of my code during this journey is always stored under
 
 ## My optimal coding environment
 
-  - I have Linux Mint 20.1 installed in my machine.
-  - For C programs, I use GCC (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0 with `-std=c99` flag.
-  - For C++ programs, I use G++ (g++ (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0) with `-std=c++14` flag.
+  - I have Ubuntu installed in my machine.
+  - For C programs, I use GCC (gcc (Ubuntu 10.2.0-5ubuntu1~20.04) 10.2.0) with `-std=c99` flag.
+  - For C++ programs, I use G++ (g++ (Ubuntu 10.2.0-5ubuntu1~20.04) 10.2.0) with `-std=c++20` flag.
   - I prefer Visual Studio Code to write the programs, sometimes Vim editor.
 
 ## Till the 100th day of code
