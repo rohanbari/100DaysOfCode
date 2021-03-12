@@ -1,8 +1,8 @@
 /**
  * @file clocktime.cpp
  * @author Rohan Bari (rohanbari4@gmail.com)
- * @brief This program counts the time that acts like a stopwatch, except it
- * has no features to make checkpoints.
+ * @brief This program counts the time that acts like a stopwatch, return
+ * key should be used to register laps.
  *
  * @version 0.1
  * @date 2021-03-11
