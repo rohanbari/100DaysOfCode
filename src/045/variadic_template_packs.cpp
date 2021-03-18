@@ -3,12 +3,12 @@
  * @author Rohan Bari (rohanbari4@gmail.com)
  * @brief This program defines how to tackle problems like: Parameters not
  * expanded with '...'.
- * 
+ *
  * @version 0.1
  * @date 2021-03-17
- * 
+ *
  * @copyright Copyright (c) 2021 Rohan Bari
- * 
+ *
  */
 
 #include <iostream>
@@ -23,6 +23,6 @@ template <typename... T> void print(T &...msg) {
 int main(void) {
   // Calling the templated function
   print("hello", "test");
-  
+
   return 0;
 }
