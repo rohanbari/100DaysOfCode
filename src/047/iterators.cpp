@@ -5,6 +5,10 @@
  * behavior on many different STL collections. All of the STL algorithms works
  * with iterators. They share three common properties with pointers.
  *
+ * These iterators are the base of STL, also known as Standard Template Library
+ * introduced in C++11 standard. It makes the code look cleaner, reduces tons
+ * of efforts, and shortens code.
+ *
  * This program enlightens the implication of all types of iterators.
  *
  * @version 0.1
@@ -14,6 +18,8 @@
  *
  */
 
+#include <algorithm>
+#include <array>
 #include <iostream>
 #include <vector>
 
@@ -72,10 +78,11 @@ void example_Iterators() {
   cout << endl;
 
   // Values are cost, backward, non-editable
-  for (; crit != value.crend(); rit++) {
+  for (; crit != value.crend(); crit++) {
     // Goes backward, but the value is const!
     // i.e. similar to Vector::const_iterator, but reversed
   }
+  cout << "---" << endl;
 }
 
 int main(void) {
