@@ -38,6 +38,11 @@ class RandomShuffle {
     // The default destructor
     ~RandomShuffle() = default;
 
+    void sortList(void) {
+        // Sort the container from lower to greater order
+        sort(numbers.begin(), numbers.end());
+    }
+
     void shuffle(void) {
         // Shuffle the container randomly using unique seeds
         srand(time(NULL));
@@ -59,7 +64,9 @@ int main(void) {
     const initializer_list<int> values{10, -2, 4, 6, 1, 0};
     RandomShuffle randomShuffle{values};
 
+    randomShuffle.sortList();
     randomShuffle.shuffle();
+
     cout << randomShuffle << endl;
 
     return 0;
