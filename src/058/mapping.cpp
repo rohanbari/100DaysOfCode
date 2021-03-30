@@ -52,14 +52,23 @@ class UseMap {
     }
 
     void findIterator(void) {
-        auto iter = instance.find("Zero");
+        auto it = instance.find("Two");
 
-        if (iter != instance.end())
-            std::cout << "Found key: " << iter->first << std::endl;
+        // Finding for an instance of "Two" key
+        for (; it != instance.end(); it++)
+            std::cout << it->first << '\t' << it->second << '\n';
+
+        // Alternative Method
+
+        it = instance.find("Two"); // Re-initializing to reset iterator
+
+        if (it != instance.end())
+            std::cout << "Found 'Two' with: " << it->second << std::endl;
     }
 };
 
 int main(void) {
+    // The map to be tested
     Map map = {
         std::pair<ALIAS>("Three", 3), std::pair<ALIAS>("One", 1),
         std::pair<ALIAS>("Two", 2),   std::pair<ALIAS>("Four", 4),
@@ -70,6 +79,7 @@ int main(void) {
 
     testInstance.testPrint();
     testInstance.testEmplace();
+    testInstance.findIterator();
 
     return 0;
 }
