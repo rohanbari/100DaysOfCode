@@ -1,8 +1,10 @@
 /**
  * @file mapping.cpp
  * @author Rohan Bari (rohanbari4@gmail.com)
- * @brief The std::map is a type of container introduced in C++ VERSION. To use
- * std::map, we need a key to access its values. Two maps could be paired.
+ * @brief The std::map is a type of a container that accesses an element with
+ * a key. Thus, to use std::map, a key to access its relative value. There is a
+ * variety of other member functions that helps to manipulate it efficiently.
+ *
  * @version 0.1
  * @date 2021-03-30
  *
