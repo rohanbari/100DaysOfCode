@@ -1,4 +1,4 @@
-[![100DC](https://i.postimg.cc/CLV2MqZ1/100DC.png)](https://postimg.cc/vD3h3DtF)
+[![100DoC](https://i.postimg.cc/CLV2MqZ1/100DC.png)](https://postimg.cc/vD3h3DtF)
 
 [I](https://github.com/rohanbari) originally initiated my #100DaysOfCode journey on 1st February 2021.
 This is my personal repository where I archive my code and make it open-source to everyone.
@@ -25,4 +25,4 @@ The history and everything of my code during this journey is always stored under
   * Stack Overflow: [Rohan Bari](https://stackoverflow.com/users/11471113/rohan-bari)
   * Gmail: [rohanbari4@gmail.com](rohanbari4@gmail.com)
   * 10FastFingers: [linuxman](https://10fastfingers.com/user/2026399)
-  * Discord: `LinuX Man#6864`
+  * Discord: `linuxman#6864`
