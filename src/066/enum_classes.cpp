@@ -15,19 +15,22 @@
 #include <iostream>
 #include <string_view>
 
-enum class ColorChannel { red, green, blue };
+enum ColorChannel { red, green, blue };
 
 namespace EnumClass {
     std::string_view selectChannel(const ColorChannel &channel) {
         switch (channel) {
+            // Without using: using enum ColorChannel
             case red: return "red";
             case green: return "green";
             case blue: return "blue";
+            default: return "error";
         }
     }
-}; // namespace EnumClass
+} // namespace EnumClass
 
 int main(void) {
-    std::cout << EnumClass::selectChannel(ColorChannel::green) << std::endl;
+    std::cout << "selectChannel(): "
+              << EnumClass::selectChannel(ColorChannel::green) << std::endl;
     return 0;
 }
