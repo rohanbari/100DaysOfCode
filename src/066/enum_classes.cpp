@@ -1,7 +1,7 @@
 /**
  * @file enum_classes.cpp
  * @author Rohan Bari (rohanbari4@gmail.com)
- * @brief C++20 introduces a new feature for using enumerations. It is to bring
+ * @brief C++17 introduces a new feature for using enumerations. It is to bring
  * an enum's members into scope to remove redundant code to increase
  * readability.
  *
