@@ -1,3 +1,12 @@
+/*
+ * safemount.c: Mount filesystems in r-w-x permission without the need of the
+ * superuser privileges. Any mounted filesystem(s) may be unmounted using a
+ * non-sudo 'umount' command.
+ *
+ * @author rohanbari
+ * @date 2021-08-16
+ */
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
