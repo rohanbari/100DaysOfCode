@@ -7,11 +7,10 @@ The history and everything of my code during this journey is always stored under
 
 ## My optimal coding environment
 
-  - I have Ubuntu installed in my machine.
+  - I have Linux Mint installed in my machine.
   - For C programs, I use GCC (gcc (Ubuntu 10.2.0-5ubuntu1~20.04) 10.2.0) with `-std=c99` flag.
-  - For C++ programs, I use G++ (g++ (Ubuntu 10.2.0-5ubuntu1~20.04) 10.2.0) with `-std=c++20` flag.
-  - For Rust programs, I use rustc 1.50.0 (cb75ad5db 2021-02-10) with cargo 1.50.0 (f04e7fab7 2021-02-04).
-  - I prefer Visual Studio Code to write the programs, sometimes Vim editor.
+  - For C++ programs, I use G++ (g++ (Ubuntu 10.2.0-5ubuntu1~20.04) 10.2.0) with `-std=c++17` flag.
+  - I prefer only Vim text-editor to write programs.
 
 ## Till the 100th day of code
 
