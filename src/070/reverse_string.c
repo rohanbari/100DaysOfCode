@@ -1,12 +1,3 @@
-/*
- * reverse_string.c: Program to reverse a given string without seeking for the
- * help of built-in string functions.
- *
- * @author rohanbari
- * @status PENDING TO BE FINISHED
- * @date   2021-08-19
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -40,23 +31,20 @@ void concatenate(char *dest, const char *src, size_t n) {
     size_t dest_len = string_length(dest);
     size_t it = 0;
 
-    for (it = 0; it < n && src[it]; it++) {
+    for (it = 0; it < n + 1 && src[it]; it++) {
         dest[dest_len + it] = src[it];
     }
-    dest[dest_len] = 0;
+    dest[dest_len + n] = 0;
 }
 
-/*
- * Reverse the passed string literal.
- */
 void reverse_string(const char *str) {
+    int len = string_length(str);
     char *rev = (char *)str;
-    int length = string_length(rev);
 
-    for (int idx = 0; idx < length; idx++) {
-        rev[idx] = str[length - idx - 2];
+    for (int idx = 0; idx < len - 1; idx++) {
+        rev[idx] = rev[len - idx];
     }
-    rev[length - 1] = 0;
+    rev[len - 1] = 0;
 
     fprintf(stdout, "%s\n", rev);
 }
