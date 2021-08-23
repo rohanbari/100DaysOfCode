@@ -15,6 +15,16 @@ void validate_args(const int argc, const char *p_name) {
 }
 
 /*
+ * Swap between two integers.
+ */
+void swap(int *a, int *b) {
+    *a += *b;
+    *b = *a - *b;
+    *a -= *b;
+    fprintf(stdout, "%d %d\n", *a, *b);
+}
+
+/*
  * Measure the length of the string.
  */
 int string_length(const char *str) {
@@ -37,14 +47,14 @@ void concatenate(char *dest, const char *src, size_t n) {
     dest[dest_len + n] = 0;
 }
 
-void reverse_string(const char *str) {
+void reverse_string(char *str) {
     int len = string_length(str);
     char *rev = (char *)str;
 
     for (int idx = 0; idx < len - 1; idx++) {
-        rev[idx] = rev[len - idx];
+        swap((int *)&str[idx], (int *)&str[len - idx]);
     }
-    rev[len - 1] = 0;
+    str[len - 1] = 0;
 
     fprintf(stdout, "%s\n", rev);
 }
