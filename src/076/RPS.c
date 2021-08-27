@@ -23,8 +23,14 @@
 #define YELLOW   "\033[1;33m"
 #define BLUE     "\033[1;34m"
 
+/*
+ * The possibilities.
+ */
 const char options[] = {'r', 'p', 's'};
 
+/*
+ * A unit score.
+ */
 struct Pair {
     int user;
     int computer;
@@ -42,7 +48,7 @@ struct Score {
 void display_banner(void) {
     const char *banner =
         "o==========================================================o\n" \
-        "| THE ROCK-PAPER-SCISSORS GAME                  v1.0-alpha |\n" \
+        "| THE ROCK-PAPER-SCISSORS GAME                 v1.0-stable |\n" \
         "o==========================================================o\n" \
         "| The Rock Paper Scissors is a hand game which is commonly |\n" \
         "| played between two people, in which each forms one of    |\n" \
@@ -56,7 +62,7 @@ void display_banner(void) {
         "| TEST YOURSELF AND SEE HOW LUCKY YOU ARE. GOOD LUCK!      |\n" \
         "|----------------------------------------------------------|\n" \
         "|         This program is created and maintained by        |\n" \
-        "|             Rohan Bari (rohanbari4@gmail.com)            |\n" \
+        "|             Rohan Bari <rohanbari4@gmail.com>            |\n" \
         "o==========================================================o\n";
     if (system("@cls||clear") != EXIT_SUCCESS) {
         fprintf(stderr, RED "%s: Failed to clear screen.\n" NOCOLOR, __func__);
@@ -125,35 +131,71 @@ void run_game(void) {
             fprintf(stdout, "(R)ock (P)aper or (S)cissors: ");
 
             if (fscanf(stdin, "%lc", &pair.user) != 1) {
-                fprintf(stderr, RED "%s: Invalid input." NOCOLOR, __func__);
+                fprintf(stderr, RED "%s: Invalid input. " NOCOLOR, __func__);
                 exit(EXIT_FAILURE);
             }
             discard_newlines();
 
-            int result = game_result(pair.user, pair.computer);
+            if (pair.user != 'r' && pair.user != 'p' && pair.user != 's') {
+                fprintf(stdout, RED "Only <r>, <p>, <s> are allowed. " NOCOLOR);
 
-            if (result == GAME_WIN) {
-                fprintf(stdout, GREEN "You won the match!\n" NOCOLOR);
-                score.games_won++;
-            } else if (result == GAME_LOSE) {
-                fprintf(stdout, RED "You lost the match.\n" NOCOLOR);
-            } else {
-                fprintf(stdout, YELLOW "The game was a draw.\n" NOCOLOR);
                 getchar();
                 continue;
             }
-//            fprintf(stdout, "The computer chose %s.\n",);
-            getchar();
+            int result = game_result(pair.user, pair.computer);
 
-            if (score.games_played == (MAX_ROUNDS - 1) && score.games_won > 2) {
-                score.games_won = 0;
-                score.games_played = 0;
-                score.round++;
-                break;
+            int capital_letter = pair.computer - 32;
+            fprintf(stdout, "The computer chose %lc. ", capital_letter);
+
+            if (result == GAME_WIN) {
+                fprintf(stdout, GREEN "You won the match! " NOCOLOR);
+                score.games_won++;
+            } else if (result == GAME_LOSE) {
+                fprintf(stdout, RED "You lost the match. " NOCOLOR);
+            } else {
+                fprintf(stdout, YELLOW "The match was a draw. " NOCOLOR);
+                getchar();
+                continue;
+            }
+            
+            // getchar();
+            discard_newlines();
+
+            if (score.games_played == (MAX_MATCHES - 1)) {
+                if (score.games_won > 2) {
+                    score.games_won = 0;
+                    score.games_played = 0;
+                    score.round++;
+
+                    if (score.round == MAX_ROUNDS) {
+                        fprintf(stdout, GREEN "\nCongratulations! "
+                                        "You have cleared all the rounds &"
+                                        " WON the game! " NOCOLOR);
+                        getchar();
+                        break;
+                    }
+
+                    fprintf(stdout, GREEN "\nCongratulations! You have reached "
+                                    "the next round. " NOCOLOR);
+                    discard_newlines();
+
+                    break;
+                } else {
+                    fprintf(stdout,
+                        RED "\nYou are disqualified due to not winning at least"
+                        " 3 matches. " NOCOLOR);
+                    getchar();
+                    // Force exit from both loops are required.
+                    // In order to tackle various complications, goto statement
+                    // is used, it is used here in extreme need.
+                    goto exit;
+                }
             }
             score.games_played++;
         }
     }
+exit:
+    ;
 }
 
 int main(void) {
@@ -161,7 +203,7 @@ int main(void) {
     srand(time(NULL));
     run_game();
 
-    fprintf(stdout, YELLOW "\n== THANK YOU FOR PLAYING THE GAME! ==\n\n");
+    fprintf(stdout, YELLOW "\n== THANK YOU FOR PLAYING! ==\n\n" NOCOLOR);
     
     return EXIT_SUCCESS;
 }
