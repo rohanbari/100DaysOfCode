@@ -1,6 +1,6 @@
 /*
- * socket_server.c: The server-side program of Socket application demonstration.
- * This program is still under development and available only in Alpha channel.
+ * socket_server.c: The server program for the Socket application.
+ * REQUIRES LINUX ENVIRONMENT.
  *
  * Author: Rohan Bari
  * Date:   2021-09-06
@@ -8,41 +8,59 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/socket.h>
 #include <unistd.h>
+#include <errno.h>
+#include <string.h>
 #include <netinet/in.h>
 
 #define BUFFER_SIZE 1024
-#define PORT        8080
+#define INFINITE 1
+#define PORT 5000
+#define SLEEP_TIME 1
 
-const char *message = "Welcome to the Linux server!";
+const char *MESSAGE = "Welcome to the Linux server!\n";
 
 int main(void) {
-    char buffer[BUFFER_SIZE];
+    // File descriptor to initialize the socket.
+    int listenfd = 0;
+    int connfd = 0;
+    struct sockaddr_in serv_addr;
+    char sendBuff[BUFFER_SIZE];
 
-    int server_fd;
-    int new_sock;
-    int value;
+    // Initializing the socket descriptor.
+    listenfd = socket(AF_INET, SOCK_STREAM, 0);
 
-    int opt = 1;
+    fprintf(stdout, "Socket successfully received.\n"
+        "Hit <Ctrl>+<C> to terminate the process.\n");
 
-    struct sockaddr_in address;
+    // Filling each room with Zero-ASCII code character.
+    memset(&serv_addr, '0', sizeof(serv_addr));
+    memset(sendBuff, '0', sizeof(sendBuff));
 
-    // Construction of the socket file descriptor.
-    if (!(server_fd = socket(AF_INET, SOCK_STREAM, 0))) {
-        perror("socket server_fd");
+    // Necessary configurations regarding the server address.
+    serv_addr.sin_family = AF_INET;
+    serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+    serv_addr.sin_port = htons(PORT);
+
+    bind(listenfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr));
+
+    if (listen(listenfd, 10) == EOF) {
+        perror("listen");
         return EXIT_FAILURE;
     }
 
-    // Attaching the socket to the PORT.
-    if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR | \
-        SO_REUSEPORT, &opt, sizeof opt)) {
-        perror("setsockopt");
-        return EXIT_FAILURE;
+    while (INFINITE) {
+        // Accept the awaiting request.
+        connfd = accept(listenfd, (struct sockaddr *)NULL, NULL);
+
+        strcpy(sendBuff, MESSAGE);
+        if (strlen(sendBuff) != write(connfd, sendBuff, strlen(sendBuff))) {
+            fprintf(stderr, "warn: Buffer byte data lost.\n");
+        }
+
+        close(connfd);
+        sleep(SLEEP_TIME);
     }
-    address.sin_family = AF_INET;
-    address.sin_addr.s_addr = INADDR_ANY;
-    address.sin_port = htons(PORT);
 
     return EXIT_SUCCESS;
 }
