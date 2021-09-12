@@ -22,7 +22,7 @@ typedef enum {
  */
 void validate_arguments(const int argc, const char *p_name) {
     if (REQ_ARGS != argc) {
-        fprintf(stderr, "Usage: %s --<encrypt/decrypt> <plain text>\n", p_name);
+        fprintf(stderr, "Usage: %s --<encrypt/decrypt> <text>\n", p_name);
         exit(EXIT_FAILURE);
     }
 }
@@ -69,7 +69,7 @@ void caesar_encrypt(char *plain_text) {
 void caesar_decrypt(char *cipher_text) {
     // Equivalent expression: cipher_text[i] != '\0'
     for (int i = 0; cipher_text[i]; i++)
-        if (cipher_text[i] > 65 && cipher_text[i] < 67)
+        if (cipher_text[i] > 'A' && cipher_text[i] < 'C')
             cipher_text[i] = (char)(cipher_text[i] + 23);
         else
             cipher_text[i] = (char)(cipher_text[i] - 3);
@@ -87,7 +87,7 @@ int main(int argc, char **argv) {
         case DECRYPT: caesar_decrypt(argv[2]); break;
         case UNKNOWN:
             fprintf(stderr, "error: Unrecognized command '%s'.\n"
-                            "Usage: %s --<encrypt/decrypt> <plain text>\n",
+                            "Usage: %s --<encrypt/decrypt> <text>\n",
                             argv[1], argv[0]);
             return EXIT_FAILURE;
             break;
